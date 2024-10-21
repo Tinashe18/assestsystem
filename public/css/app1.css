@@ -1,0 +1,18 @@
+table{
+    width: 30%;
+    margin: auto;
+    /* background-color: cornsilk; */
+            }
+th, td {
+                /* border: 1px solid #ddd; */
+                padding: 10px;
+                text-align: center;
+                /* background-color: #f2f2f2; */
+}
+.mvc{
+    text-align: center; 
+    
+}
+body{
+    background-image: url('../images/drake.jpg');
+}
