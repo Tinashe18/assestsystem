@@ -39,22 +39,35 @@ class ProductController extends Controller
     }
 
     
-    public function create(){
-        return view('product.create');
+    public function create(Request $request){
+        $prodtypes = prodtypes::all();
+        
+        
+        return view('product.create', compact('prodtypes' ));
+        
     }
 
     public function store(Request $request){
+     
+        // $data->username=Auth::user()->name;
+   
+        
+     
+        $file = $request->file('file');
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('uploads'), $filename);
+
         $data = new products;
-        $data->username=Auth::user()->name;
+        // return back()->with('success', 'File uploaded successfully.');
         $data->serialnumber=$request->input('SerialNumber');
         $data->productname=$request->input('ProductName');
-        $data->producttype=$request->input('ProductType');
+        $data->producttype=$request->input('Producttype');
         $data->brand=$request->input('Brand');
         $data->model=$request->input('Model');
         $data->purchasedate=$request->input('PurchaseDate');
         $data->warrantyexpirydate=$request->input('WarrantyExpiryDate');
-        
-
+        $data->image = $filename;
+    
         $data->save();
         
         //  // Redirect to a new page
@@ -84,7 +97,7 @@ class ProductController extends Controller
         $data = Products::findOrFail($id);
         $data->serialnumber=$request->input('SerialNumber');
         $data->productname=$request->input('ProductName');
-        $data->producttype=$request->input('ProductType');
+        $data->producttype=$request->input('producttype');
         $data->brand=$request->input('Brand');
         $data->model=$request->input('Model');
         $data->warrantyexpirydate=$request->input('WarrantyExpiryDate');

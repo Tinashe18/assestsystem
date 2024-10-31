@@ -13,7 +13,7 @@
     <div class="">
       
         <h1>REGISTRATION</h1>
-    <form method="post" action="{{route('product.store')}} ">
+    <form method="post" enctype="multipart/form-data" action="{{route('product.store')}} ">
         @csrf
         @method('post')
         <table>
@@ -30,14 +30,17 @@
     </div>
         <div class="row">
             <div class="col">
-        <label for="poducttype" class="form-label">Product Type:</label>
+        <label for="producttype" class="form-label">Product Type:</label>
             </div>
         <div class="col">
-        <input type="text" class="form-control" name="ProductType">
-        </div>
+            <select name="Producttype">
+                @foreach ($prodtypes as $prodtype)
+                    <option value="{{ $prodtype->name}}">{{ $prodtype->name}}</option>
+                @endforeach
+               </select>
+        {{-- <input type="text" class="form-control" name="ProductType"> --}}
+        </div> 
     </div>
-    
-    
         <div class="row">
             <div class="col">
         <label for="brand" class="form-label">Brand:</label>
@@ -74,9 +77,14 @@
     <input type="text" class="form-control" name="WarrantyExpiryDate">
 </div>
     </div>
-
-
-    
+    <div class="row">
+        <div class="col">
+    <label for="image" class="form-label">Image:</label>
+        </div>
+   <div class="col">
+    <input type="file" class="form-control" name="file">
+</div>
+    </div>
     </div>
 
         <button type="submit" class="btn btn-info">save</button>
